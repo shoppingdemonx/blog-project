@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+<!-- HERO -->
+{% block title %}Home Page | Blog App{% endblock %}
+{% block body %}
+{% if not request.user.is_authenticated %}
+<section class="hero">
+
+<div class="hero-text">
+<h1>Read. Write. Share.</h1>
+<p>Discover amazing articles and share your ideas with the world.</p>
+<a href="#" class="hero-btn">Start Reading</a>
+</div>
+
+<img src="https://images.unsplash.com/photo-1499750310107-5fef28a66643">
+
+</section>
+    
+{% endif %}
+
+
+<!-- BLOG POSTS -->
+
+<section class="blog-section">
+
+<h2 class="blog-title">Latest Blogs</h2>
+
+<div class="blog-grid">
+
+<div class="blog-card">
+<img src="https://images.unsplash.com/photo-1492724441997-5dc865305da7">
+<div class="blog-content">
+<h3>Design Trends 2026</h3>
+<p>Explore the newest design trends shaping modern websites.</p>
+<a href="#" class="read-btn">Read More →</a>
+</div>
+</div>
+
+<div class="blog-card">
+<img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c">
+<div class="blog-content">
+<h3>Learning Web Development</h3>
+<p>A beginner guide to becoming a frontend developer.</p>
+<a href="#" class="read-btn">Read More →</a>
+</div>
+</div>
+
+<div class="blog-card">
+<img src="https://images.unsplash.com/photo-1508780709619-79562169bc64">
+<div class="blog-content">
+<h3>Remote Work Lifestyle</h3>
+<p>How remote work is changing the future of jobs.</p>
+<a href="#" class="read-btn">Read More →</a>
+</div>
+</div>
+
+</div>
+
+</section>
+{% endblock %}
