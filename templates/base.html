@@ -23,8 +23,7 @@
 
       {% if request.user.is_authenticated %}
       <div class="profile">
-        <img src="https://i.pravatar.cc/150?img=12" alt="profile" />
-
+        <img src="{{profile.profile_pic.url}}" alt="profile" />
         <div class="dropdown">
           <a href="#">Profile</a>
           <a href="#">My Blogs</a>
