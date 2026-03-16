@@ -1,0 +1,35 @@
+{% extends 'base.html' %} 
+{% block title %}Edit Profile - BlogSpace{% endblock %} 
+{% block body %}
+<main class="login-page">
+  <div class="box-container">
+    <h2>Edit Profile</h2>
+
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div class="input-group">
+        <label>Username</label>
+        <input type="text" name="username" value="{{request.user.username}}" disabled/>
+      </div>
+      <div class="input-group">
+        <label>Bio</label>
+        <input type="text" name="bio" value="{{request.user.profile.bio}}" placeholder="Enter few lines about you."/>
+      </div>
+
+      <div class="input-group">
+        <label>Profile Pic</label>
+        <span hidden>
+          value="{{request.user.profile.profile_pic.url}}"
+        </span>
+        <input
+          type='file'
+          name="profile_pic"
+          accept="image/*"
+        />
+      </div>
+
+      <button class="btn">Update</button>
+    </form>
+  </div>
+</main>
+{% endblock %}

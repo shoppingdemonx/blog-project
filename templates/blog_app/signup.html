@@ -1,0 +1,39 @@
+{% extends 'base.html' %} 
+{% block title %}SignUp - BlogSpace{% endblock %} 
+{% block body %}
+<main class="login-page">
+  <div class="box-container">
+    <h2>Welcome to BlogSpace </h2>
+
+    <form method="post">
+      {% csrf_token %}
+      <div class="input-group">
+        <label>Username</label>
+        <input type="text" name="username" placeholder="Enter your username" />
+      </div>
+      <div class="input-group">
+        <label>Email</label>
+        <input type="email" name="email" placeholder="Enter your email" />
+      </div>
+      <div class="input-group">
+        <label>Password</label>
+        <input type="tex" name="passwd1" placeholder="Enter your password" />
+      </div>
+      <div class="input-group">
+        <label>Confirm Password</label>
+        <input
+          type="password"
+          name="passwd2"
+          placeholder="Enter your password"
+        />
+      </div>
+
+      <button class="btn">SignUp</button>
+
+      <div class="extra">
+        <p>Already have an account? <a href="{% url 'login' %}">Login</a></p>
+      </div>
+    </form>
+  </div>
+</main>
+{% endblock %}

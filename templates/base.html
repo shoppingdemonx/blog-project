@@ -15,7 +15,7 @@
       <div class="logo">BlogSpace</div>
 
       <ul>
-        <li><a href="#">Home</a></li>
+        <li><a href="/">Home</a></li>
         <li><a href="#">Blogs</a></li>
         <li><a href="#">Categories</a></li>
         <li><a href="#">About</a></li>
@@ -23,18 +23,26 @@
 
       {% if request.user.is_authenticated %}
       <div class="profile">
-        <img src="{{profile.profile_pic.url}}" alt="profile" />
+        <img src="{{request.user.profile.profile_pic.url}}" alt="profile" />
         <div class="dropdown">
-          <a href="#">Profile</a>
+          <a href="{% url 'edit_profile' %}">Edit Profile</a>
           <a href="#">My Blogs</a>
-          <a href="#">Settings</a>
-          <a href="#">Logout</a>
+          <!-- <a href="#">Settings</a> -->
+          <a href="{% url 'logout' %}">Logout</a>
         </div>
       </div>
       {% else %}
-      <a href="#" class="nav-btn">Login</a>
+      <a href="{% url 'login' %}" class="nav-btn">Login</a>
       {% endif %}
     </nav>
+    
+    {% if messages %}
+    <div class="message-container">
+      {% for message in messages %}
+      <div class="alert {{ message.tags }}">{{ message }}</div>
+      {% endfor %}
+    </div>
+    {% endif %} 
     {% block body %}{% endblock %}
 
     <!-- FOOTER -->

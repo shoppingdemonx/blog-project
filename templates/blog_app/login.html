@@ -2,7 +2,7 @@
 {% block title %}Login - BlogSpace{% endblock %} 
 {% block body %}
 <main class="login-page">
-  <div class="login-container">
+  <div class="box-container">
     <h2>Welcome Back 👋</h2>
 
     <form method="post">
@@ -21,10 +21,10 @@
         />
       </div>
 
-      <button class="login-btn">Login</button>
+      <button class="btn">Login</button>
 
       <div class="extra">
-        <p>Don't have an account? <a href="#">Register</a></p>
+        <p>Don't have an account? <a href="{% url 'signup' %}">Register</a></p>
       </div>
     </form>
   </div>
