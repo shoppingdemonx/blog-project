@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth.models import User
-from .models import Profile
+from .models import Profile,Post,PostImages
 from django.contrib.auth import authenticate,login,logout
 from django.contrib import messages
 
@@ -8,8 +8,10 @@ from django.contrib import messages
 
 def home(request):
     # profile = Profile.objects.get(user=request.user)
+    posts = Post.objects.all()
     context = {
-        # 'profile':profile
+        # 'profile':profile,
+        'posts':posts
     }
     return render(request,'blog_app/home.html',context)
 
