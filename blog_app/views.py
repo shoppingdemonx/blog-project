@@ -3,6 +3,10 @@ from django.contrib.auth.models import User
 from .models import Profile,Post,PostImages
 from django.contrib.auth import authenticate,login,logout
 from django.contrib import messages
+import random
+from django.core.cache import cache
+from django.template.loader import render_to_string
+from django.core.mail import EmailMultiAlternatives
 
 # Create your views here.
 
@@ -16,7 +20,35 @@ def home(request):
     return render(request,'blog_app/home.html',context)
 
 
+def become_creator(request):
+    if request.user.is_authenticated and request.user.profile.is_creator:
+        return redirect('home')
+    
+    
+    return render(request,'blog_app/become_creator.html')
 
+def verify_otp(request):
+    pass
+
+def send_otp(request):
+    user = request.user
+    
+    otp = str(random.randint(100000,999999))
+    
+    cache.set(f'otp_{user.id}',otp,timeout=300)
+    email_body = render_to_string('blog_app/otp_template.html',{'user': user,'otp': otp})
+    
+    email = EmailMultiAlternatives(
+        subject='Your OTP Code',
+        body=f'Your OTP is {otp}',
+        from_email='shoppingdemonx1@gmail.com',
+        to=[user.email],
+    )
+    email.attach_alternative(email_body,"text/html")
+    email.send()
+    
+    return redirect('verify-otp')
+    
 def login_view(request):
     if request.method == 'POST':
         username = request.POST.get('username')

@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block title %}
+    Become a Creator | BlogSpace
+{% endblock %}
+
+{% block body %}
+
+<div class="creator-page">
+
+    <!-- Header -->
+    <section class="creator-header">
+        <h1 class="creator-title">Become a Creator</h1>
+        <p class="creator-subtitle">
+            Share your content, grow your audience, and earn money 🚀
+        </p>
+    </section>
+
+    <!-- Benefits -->
+    <section class="creator-benefits-grid">
+
+        <div class="benefit-card">
+            <h3 class="benefit-title">Grow Audience</h3>
+            <p class="benefit-text">Reach thousands of users instantly.</p>
+        </div>
+
+        <div class="benefit-card">
+            <h3 class="benefit-title">Earn Money</h3>
+            <p class="benefit-text">Monetize your skills and content.</p>
+        </div>
+
+        <div class="benefit-card">
+            <h3 class="benefit-title">Build Brand</h3>
+            <p class="benefit-text">Create your personal brand online.</p>
+        </div>
+
+    </section>
+    <!-- Action -->
+    <section class="creator-action-box">
+        <h2 class="action-heading">Verify Your Email to Continue</h2>
+        <p class="action-text">
+            To become a creator, please verify your email address first.
+        </p>
+
+        <!-- Django URL -->
+        <a href="{% url 'send-otp' %}" class="verify-button">
+            Verify Email & Become Creator
+        </a>
+    </section>
+
+</div>
+{% endblock %}
