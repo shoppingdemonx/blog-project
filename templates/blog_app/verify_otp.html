@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% block title %} Verify OTP {% endblock %}
+
+{% block body %}
+<div class="otp-page">
+  <div class="otp-box">
+    <h2 class="otp-title">OTP Verification</h2>
+    <p class="otp-subtitle">Enter the 6-digit OTP sent to your email</p>
+
+    <form method="POST">
+      {% csrf_token %}
+
+      <div class="otp-fields">
+        <input type="text" maxlength="1" required />
+        <input type="text" maxlength="1" required />
+        <input type="text" maxlength="1" required />
+        <input type="text" maxlength="1" required />
+        <input type="text" maxlength="1" required />
+        <input type="text" maxlength="1" required />
+      </div>
+
+      <input type="hidden" name="otp" id="otp" />
+
+      <button type="submit" class="otp-btn">Verify</button>
+    </form>
+
+    <p class="otp-resend">
+      Didn't receive OTP? <a href="{% url 'send-otp' %}">Resend</a>
+    </p>
+  </div>
+</div>
+
+<script>
+  const inputs = document.querySelectorAll(".otp-fields input");
+  const hiddenInput = document.getElementById("otp");
+
+  inputs.forEach((input, index) => {
+    input.addEventListener("input", () => {
+      if (input.value.length === 1 && index < inputs.length - 1) {
+        inputs[index + 1].focus();
+      }
+      updateOTP();
+    });
+
+    input.addEventListener("keydown", (e) => {
+      if (e.key === "Backspace" && index > 0 && input.value === "") {
+        inputs[index - 1].focus();
+      }
+    });
+  });
+
+  function updateOTP() {
+    let otp = "";
+    inputs.forEach((input) => {
+      otp += input.value;
+    });
+    hiddenInput.value = otp;
+  }
+</script>
+
+{% endblock %}

@@ -5,6 +5,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{% block title %}{% endblock %}</title>
+    {% block style %}
+    {% endblock %}
     <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
   </head>
 
@@ -31,7 +33,7 @@
             <!-- <a href="#">Settings</a> -->
             <a href="{% url 'logout' %}">Logout</a>
             {% if not request.user.profile.is_creator %}
-            <a href="{% url 'home' %}">Become a Creator</a>
+            <a href="{% url 'become_creator' %}">Become a Creator</a>
             {% endif %}
           </div>
         </div>
@@ -46,17 +48,31 @@
       <a href="{% url 'login' %}" class="nav-btn">Login</a>
       {% endif %}
     </nav>
-
-    {% if messages %}
-    <div class="message-container">
-      {% for message in messages %}
-      <div class="alert {{ message.tags }}">{{ message }}</div>
-      {% endfor %}
-    </div>
-    {% endif %} {% block body %}{% endblock %}
+    
+{% if messages %}
+<div class="message-wrapper">
+    {% for message in messages %}
+        <div class="alert {{ message.tags }}">
+            <span>{{ message }}</span>
+            <button class="close-btn" onclick="this.parentElement.style.display='none'">
+                &times;
+            </button>
+        </div>
+    {% endfor %}
+</div>
+{% endif %}
+{% block body %}
+    {% endblock %}
 
     <!-- FOOTER -->
 
     <footer>© 2026 BlogSpace. All rights reserved.</footer>
   </body>
+  <script>
+setTimeout(() => {
+    document.querySelectorAll(".alert").forEach(msg => {
+        msg.style.display = "none";
+    });
+}, 3000);
+</script>
 </html>

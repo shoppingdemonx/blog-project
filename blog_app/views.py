@@ -28,9 +28,35 @@ def become_creator(request):
     return render(request,'blog_app/become_creator.html')
 
 def verify_otp(request):
-    pass
+    profile = Profile.objects.get(user = request.user)
+    if request.method == 'POST':
+        otp = request.POST.get('otp')
+        saved_otp = cache.get(f'otp_{request.user.id}')
+        
+        if otp == saved_otp:
+            profile.is_creator = True
+            profile.save()
+            messages.success(request,'OTP Verified Successfully. You have became a creator..')
+            email_body = render_to_string('blog_app/creator_success.html')
+            email = EmailMultiAlternatives(
+                subject="You're now a Creator 🎉",
+                body="You are now a creator!",
+                from_email='shoppingdemonx1@gmail.com',
+                to=[request.user.email],
+            )
+            email.attach_alternative(email_body,"text/html")
+            email.send()
+            
+            return redirect('home')
+        else:
+            messages.success(request,"Invalid OTP !Please Try again..")
+            return redirect('verify-otp')
+        
+    return render(request,'blog_app/verify_otp.html')
 
 def send_otp(request):
+    if not request.user.is_authenticated:
+        return redirect('login')
     user = request.user
     
     otp = str(random.randint(100000,999999))
@@ -47,6 +73,8 @@ def send_otp(request):
     email.attach_alternative(email_body,"text/html")
     email.send()
     
+    messages.success(request,"OTP sent successfully..")
+    
     return redirect('verify-otp')
     
 def login_view(request):
@@ -61,6 +89,7 @@ def login_view(request):
             return redirect('login')
         else:
             login(request,user)
+            messages.success(request,"Login Successfull..")
             if Profile.objects.filter(user=request.user).exists():
                 return redirect('home')
             else:

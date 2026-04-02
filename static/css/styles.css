@@ -136,6 +136,61 @@ nav ul li a:hover {
   display: flex;
 }
 
+
+
+/* Messages */
+
+.message-wrapper {
+    position: fixed;
+    top: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+}
+
+.alert {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    min-width: 220px;
+    max-width: 320px;
+    padding: 10px 14px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    font-size: 14px;
+    color: white;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+/* Close button */
+.close-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    line-height: 1;
+}
+
+/* Message colors */
+.alert.success {
+    background: #28a745;
+}
+
+.alert.error {
+    background: #dc3545;
+}
+
+.alert.warning {
+    background: #ffc107;
+    color: black;
+}
+
+.alert.info {
+    background: #17a2b8;
+}
+
 /* HERO */
 
 .hero {
@@ -407,4 +462,90 @@ footer {
 
 .verify-button:hover {
   background: #4338ca;
+}
+
+
+
+/* *************************  OTP-Verify Page  *********************** */
+/* Full page wrapper */
+.otp-page {
+    min-height: calc(100vh - 70px); /* adjust navbar height */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Card box */
+.otp-box {
+    width: 100%;
+    max-width: 400px;
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* Title */
+.otp-title {
+    margin-bottom: 10px;
+}
+
+/* Subtitle */
+.otp-subtitle {
+    color: #555;
+    margin-bottom: 20px;
+}
+
+/* OTP input group */
+.otp-fields {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+/* Each input */
+.otp-fields input {
+    width: 45px;
+    height: 50px;
+    font-size: 20px;
+    text-align: center;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    outline: none;
+    transition: 0.3s;
+}
+
+/* Focus effect */
+.otp-fields input:focus {
+    border-color: #4facfe;
+    box-shadow: 0 0 5px rgba(79, 172, 254, 0.5);
+}
+
+/* Button */
+.otp-btn {
+    width: 100%;
+    padding: 12px;
+    background: #4facfe;
+    border: none;
+    color: white;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.otp-btn:hover {
+    background: #00c6ff;
+}
+
+/* Resend text */
+.otp-resend {
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+.otp-resend a {
+    color: #4facfe;
+    text-decoration: none;
 }
