@@ -25,21 +25,26 @@
 <h2 class="blog-title">Latest Blogs</h2>
 
 <div class="blog-grid">
-
 {% for post in posts %}
 
 <div class="blog-card">
-<img src="https://images.unsplash.com/photo-1492724441997-5dc865305da7">
-<div class="blog-content">
-<h3>{{post.title}}</h3>
-<p>{{post.content | truncatewords:15}}</p>
-<a href="#" class="read-btn">Read More →</a>
-</div>
+
+    {% with post.postimages_set.first as first_img %}
+        {% if first_img %}
+            <img src="{{ first_img.image.url }}">
+        {% else %}
+            <p></p>
+        {% endif %}
+    {% endwith %}
+
+    <div class="blog-content">
+        <h3>{{ post.title }}</h3>
+        <p>{{ post.content|truncatewords:15 }}</p>
+    </div>
+
 </div>
 
-    
 {% endfor %}
-
 </div>
 
 </section>

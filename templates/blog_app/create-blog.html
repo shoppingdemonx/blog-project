@@ -1,0 +1,69 @@
+{% extends 'base.html' %} {% block title %} Create Blog {% endblock %} 
+{% block body %}
+<div class="create-blog-container">
+  <div class="blog-editor">
+    <h2 class="blog-editor__title">Create Blog Post</h2>
+
+    <form method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div class="blog-field">
+        <label class="blog-field__label">Title</label>
+        <input
+          type="text"
+          name="title"
+          class="blog-field__input"
+          placeholder="Enter blog title"
+          required
+        />
+      </div>
+
+      <!-- CONTENT -->
+      <div class="blog-field">
+        <label class="blog-field__label">Content</label>
+        <textarea
+          name="content"
+          class="blog-field__textarea"
+          placeholder="Write your blog content..."
+          required
+        ></textarea>
+      </div>
+
+      <!-- IMAGE UPLOAD -->
+      <div class="blog-field">
+        <label class="blog-field__label" style="margin-bottom:30px">Upload Images</label>
+
+        <label class="blog-upload">
+          Click or drag images here to upload
+          <input
+            type="file"
+            name="images[]"
+            class="blog-upload__input"
+            multiple
+          />
+        </label>
+      </div>
+
+      <!-- ACTION BUTTONS -->
+      <div class="blog-actions" style="margin-top: 50px;">
+        <button
+          type="submit"
+          name="action"
+          value="publish"
+          class="blog-button blog-button--publish"
+        >
+          Publish
+        </button>
+
+        <button
+          type="submit"
+          name="action"
+          value="draft"
+          class="blog-button blog-button--draft"
+        >
+          Save as Draft
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

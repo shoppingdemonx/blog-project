@@ -10,4 +10,5 @@ urlpatterns = [
     path('become-creator/',views.become_creator,name='become_creator'),
     path('send-otp/',views.send_otp,name='send-otp'),
     path('verify-otp/',views.verify_otp,name='verify-otp'),
+    path('create-blog/',views.create_blog,name='create-blog')
 ]
